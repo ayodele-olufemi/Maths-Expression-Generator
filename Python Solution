@@ -1,0 +1,154 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Fri Jan 24 17:56:13 2020
+
+@author: ayyor
+"""
+from itertools import permutations
+import random
+
+numbers = ['1','2','3','4','5']
+symbols = ['+','-','*','/']
+
+numbers = permutations(numbers)
+numbers = list(numbers)
+numbers = [list(i) for i in numbers]
+
+result = []
+j = 0
+while j < 50:
+    for i in range(0, len(numbers)):
+        result.append(numbers[i][0] + random.choice(symbols) + numbers[i][1] + random.choice(symbols) + numbers[i][2] + random.choice(symbols) + numbers[i][3] + random.choice(symbols) + numbers[i][4])
+    j += 1
+
+class my_dictionary(dict): 
+  
+    # __init__ function 
+    def __init__(self): 
+        self = dict() 
+          
+    # Function to add key:value 
+    def add(self, key, value): 
+        self[key] = value 
+
+evaluation = my_dictionary()
+for i in range(0, len(result)):
+    evaluation.add(result[i],eval(result[i]))
+
+onlyintegers = my_dictionary()
+for i in evaluation.keys():
+    if isinstance(evaluation[i], int) and evaluation[i] > 0:
+        onlyintegers.add(i,evaluation[i])
+
+sortedResult = {k: v for k, v in sorted(onlyintegers.items(), key=lambda item: item[1])}
+
+def unique(list1): 
+  
+    # intilize a null list 
+    unique_list = [] 
+      
+    # traverse for all elements 
+    for x in list1: 
+        # check if exists in unique_list or not 
+        if x not in unique_list: 
+            unique_list.append(x) 
+    # print list 
+    for x in unique_list: 
+        print(x)
+
+
+def getKeysByValue(dictOfElements, valueToFind):
+    listOfKeys = list()
+    listOfItems = dictOfElements.items()
+    for item  in listOfItems:
+        if item[1] == valueToFind:
+            listOfKeys.append(item[0])
+    return  listOfKeys
+
+print("Enter a positive integer between 1 and 100: ")
+x = float(input())
+while x < 0 or int(x) != x or x > 100:
+    print("Invalid number entered")
+    print("Enter a positive integer between 1 and 100: ")
+    x = float(input())
+    
+x = int(x)
+print("Ok. Nice!")
+print("We're looking for expressions which gives ", x)
+
+listOfExpressions = getKeysByValue(sortedResult, x)
+
+if len(listOfExpressions) == 0:
+    print("Sorry! We couldn't find an expression this time.")
+else: 
+    print("These are the expressions that give ", x)
+    unique(listOfExpressions)
+
+Additional resources used: 
+https://thispointer.com/python-how-to-find-keys-by-value-in-dictionary/
+https://www.geeksforgeeks.org/python-get-unique-values-list/
+
+________________________________________
+From: Veltsos, Christophe V <christophe.veltsos@mnsu.edu>
+Sent: Friday, January 24, 2020 8:46 PM
+To: Olufemi, Ayodele E <ayodele.olufemi@mnsu.edu>
+Subject: Re: Group solution to class activity 
+ 
+Well done. Who was the third member of your team again?
+
+Dr. V
+
+________________________________________
+From: Olufemi, Ayodele E <ayodele.olufemi@mnsu.edu>
+Sent: Friday, January 24, 2020 7:37 PM
+To: Veltsos, Christophe V <christophe.veltsos@mnsu.edu>
+Cc: Anyarah, Johnson W <johnson.anyarah@mnsu.edu>
+Subject: Group solution to class activity 
+ 
+Coded in python, this is what we were able to arrive at: 
+
+
+
+# -*- coding: utf-8 -*-
+"""
+Created on Fri Jan 24 17:56:13 2020
+
+@author: ayyor
+"""
+from itertools import permutations
+import random
+
+numbers = ['1','2','3','4','5']
+symbols = ['+','-','*','/']
+
+numbers = permutations(numbers)
+numbers = list(numbers)
+numbers = [list(i) for i in numbers]
+
+result = []
+j = 0
+while j < 50:
+    for i in range(0, len(numbers)):
+        result.append(numbers[i][0] + random.choice(symbols) + numbers[i][1] + random.choice(symbols) + numbers[i][2] + random.choice(symbols) + numbers[i][3] + random.choice(symbols) + numbers[i][4])
+    j += 1
+
+class my_dictionary(dict): 
+  
+    # __init__ function 
+    def __init__(self): 
+        self = dict() 
+          
+    # Function to add key:value 
+    def add(self, key, value): 
+        self[key] = value 
+
+evaluation = my_dictionary()
+for i in range(0, len(result)):
+    evaluation.add(result[i],eval(result[i]))
+
+onlyintegers = my_dictionary()
+for i in evaluation.keys():
+    if isinstance(evaluation[i], int) and evaluation[i] > 0:
+        onlyintegers.add(i,evaluation[i])
+sortedResult = {k: v for k, v in sorted(onlyintegers.items(), key=lambda item: item[1])}
+print(sortedResult)
